@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yamrire <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/14 00:44:55 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/15 22:29:43 by yamrire          ###   ########.fr       */
+/*   Created: 2022/08/15 08:29:41 by yamrire           #+#    #+#             */
+/*   Updated: 2022/08/15 08:32:52 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "so_long.h"
 
-# include <mlx.h>
-// # include "get_next_line.h"
-// # include "libftprintf.h"
-
-typedef struct s_data
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	void	*ptr;
-	void	*win;
-	void	*img;
-	int		win_width;
-	int		win_height;
-	int		img_width;
-	int		img_height;
-	int		x;
-	int		y;
-}	t_data;
+	size_t			i;
+	unsigned char	*str1;
+	unsigned char	*str2;
 
-// int	ft_strncmp(const char *s1, const char *s2, size_t n);
-
-#endif
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	i = 0;
+	if (!n)
+		return (0);
+	while (str1[i] == str2[i] && (str1[i] != '\0' || str2[i] != '\0')
+		&& (i + 1) < n)
+		i++;
+	return (str1[i] - str2[i]);
+}
