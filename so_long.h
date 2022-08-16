@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamrire <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 00:44:55 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/15 22:29:43 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/16 01:47:02 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 # define SO_LONG_H
 
 # include <mlx.h>
-// # include "get_next_line.h"
-// # include "libftprintf.h"
+# include <fcntl.h>
+# include "get_next_line.h"
+# include "libftprintf.h"
 
 typedef struct s_data
 {
