@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamrire <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 02:21:58 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/17 21:21:40 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/18 01:32:58 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,22 @@ int check_line(char *line, int len, int *player)
 	int index = 0;
 
 	// start with 1 and end with 1
-	if (line[0] != '1' || line[len - 2] != '1')
+	if (line[0] != '1' || line[len - 1] != '1')
 		return -1;
 	// check valid characters
-	while (line[index])
+	while (line[index] && index < len)
 	{
 		if (line[index] != '0' && line[index] != '1' && line[index] != 'C' && line[index] != 'E' && line[index] != 'P')
 			return -1;
 		// player
 		if (line[index] == 'P')
 		{
-			if (*player != 0)
+			if (*player == 0)
 				*player += 1;
 			else
 				return -1;
 		}
+		index++;
 	}
 	return 0;
 }
@@ -92,7 +93,7 @@ int check_map_file(char *av)
 	fd = open(av, O_RDONLY);
 	if (status != 0 || fd == -1)
 	{
-		printf("ERROR : Map name incorrect !\n");
+		ft_printf("ERROR : Map name incorrect !\n");
 		exit(-1);
 	}
 	return fd;
@@ -100,7 +101,7 @@ int check_map_file(char *av)
 
 void ft_exit(char *message)
 {
-	printf("%s\n", message);
+	ft_printf("%s\n", message);
 	exit(-1);
 }
 
@@ -114,12 +115,12 @@ int count_line(char *s)
 	return i;
 }
 
-void save_line(char *dist, char *line)
+void save_line(char **dist, char *line)
 {
 	char *tmp;
-	tmp = ft_strjoin(dist, line);
-	free(dist);
-	dist = tmp;
+	tmp = ft_strjoin(*dist, line);
+	free(*dist);
+	*dist = tmp;
 }
 
 char **map_valid_dimension(char *av)
@@ -131,6 +132,7 @@ char **map_valid_dimension(char *av)
 	int len;
 	int p_status;
 	int ret;
+	int count = 0;
 
 	p_status = 0;
 	len = 0;
@@ -145,22 +147,28 @@ char **map_valid_dimension(char *av)
 		if (len == 0)
 			len = count_line(line);
 		else if (len != count_line(line))
-			ft_exit("lines...");
+			ft_exit("ERROR : Invalid line !");
 		// check line
 		ret = check_line(line, len, &p_status);
 		if (ret == -1)
-			ft_exit("invalid map structure");
+			ft_exit("ERROR : Invalid map structure !");
 		// save line
-		save_line(saved_lines, line);
+		save_line(&saved_lines, line);
 		free(line);
+		line = NULL;
+		count++;
 	}
 	map = ft_split(saved_lines, '\n');
+	// check wall 1
+	// check wall 2
+	if (check_wall(map[0]) || check_wall(map[count - 1]))
+		ft_exit("ERROR : Invalid wall structure !");
 	return (map);
 }
 
 // int key_hook(int key, t_data *mlx)
 // {
-// 	printf("key : %d\n", key);
+// 	ft_printf("key : %d\n", key);
 // 	mlx->x += 100;
 // 	mlx_destroy_image(mlx->ptr, mlx->img);
 // 	mlx_clear_window(mlx->ptr, mlx->win);
@@ -186,13 +194,17 @@ int main(int ac, char **av)
 	// mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, 100, 100);
 	// mlx_key_hook(mlx.win, key_hook, &mlx);
 	// mlx_loop(mlx.ptr);
-
-	char **map = map_valid_dimension(av[1]);
-	int index = 0;
-	while (map[index])
+	if (ac == 2)
 	{
-		printf("%s\n", map[index]);
-		index++;
+		char **map = map_valid_dimension(av[1]);
+		int index = 0;
+		while (map[index])
+		{
+			ft_printf("%s\n", map[index]);
+			index++;
+		}
 	}
+	else
+		ft_exit("Not the right number of parameters !");
 	return 0;
 }
