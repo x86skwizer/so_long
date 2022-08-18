@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yamrire <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 02:21:58 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/18 05:13:44 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/18 18:49:59 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,42 +133,25 @@ char **map_valid_dimension(char *av, t_counter *dimension)
 	return (env.map);
 }
 
-int key_hook(int key, t_data *mlx)
+void	put_elements_positions(t_data mlx, t_counter	dimension, char **map)
 {
-	ft_printf("key : %d\n", key);
-	mlx->x += 100;
-	mlx_destroy_image(mlx->ptr, mlx->img);
-	mlx_clear_window(mlx->ptr, mlx->win);
-	mlx->img = mlx_xpm_file_to_image(mlx->ptr, "./ralph.xpm", &mlx->img_width, &mlx->img_height);
-	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img, mlx->x, mlx->y);
-	return 0;
-}
+	int i;
+	int j;
 
-int main(int ac, char **av)
-{
-	t_data	mlx;
-	char	**map;
-	t_counter	dimension;
-	int i = 0;
-	int j = 0;
-	if (ac == 2)
-	{
-		map = map_valid_dimension(av[1], &dimension);
-		mlx.ptr = mlx_init();
-		mlx.win = mlx_new_window(mlx.ptr, dimension.i * 64, dimension.j * 64, "so_long");
-		while (j < dimension.j)
+	j = 0;
+	while (j < dimension.j)
 		{
 			i = 0;
 			while (i < dimension.i)
 			{
 				mlx.img = mlx_xpm_file_to_image(mlx.ptr, "./floor.xpm", &mlx.img_width, &mlx.img_height);
 				mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, i * 64, j * 64);
-				if (map[j][i ] == '1')
+				if (map[j][i] == '1')
 				{
 					mlx.img = mlx_xpm_file_to_image(mlx.ptr, "./wall.xpm", &mlx.img_width, &mlx.img_height);
 					mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, i * 64, j * 64);
 				}
-				else if (map[j][i ] == '0')
+				else if (map[j][i] == '0')
 				{
 					mlx.img = mlx_xpm_file_to_image(mlx.ptr, "./floor.xpm", &mlx.img_width, &mlx.img_height);
 					mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, i * 64, j * 64);
@@ -192,7 +175,31 @@ int main(int ac, char **av)
 			}
 			j++;
 		}
-		
+}
+
+int key_hook(int key, t_data *mlx)
+{
+	ft_printf("key : %d\n", key);
+	mlx->x += 64;
+	mlx_destroy_image(mlx->ptr, mlx->img);
+	mlx_clear_window(mlx->ptr, mlx->win);
+	mlx->img = mlx_xpm_file_to_image(mlx->ptr, "./ralph.xpm", &mlx->img_width, &mlx->img_height);
+	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img, mlx->x, mlx->y);
+	return 0;
+}
+
+int main(int ac, char **av)
+{
+	t_data	mlx;
+	char	**map;
+	t_counter	dimension;
+
+	if (ac == 2)
+	{
+		map = map_valid_dimension(av[1], &dimension);
+		mlx.ptr = mlx_init();
+		mlx.win = mlx_new_window(mlx.ptr, dimension.i * 64, dimension.j * 64, "so_long");
+		put_elements_positions(mlx, dimension, map);
 		//mlx_key_hook(mlx.win, key_hook, &mlx);
 		mlx_loop(mlx.ptr);
 	}
