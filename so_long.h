@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 00:44:55 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/18 03:34:33 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/19 04:03:15 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,20 @@ typedef struct s_data
 	void	*ptr;
 	void	*win;
 	void	*img;
+	void	*img_p;
+	void	*img_c;
+	void	*img_e;
+	void	*img_w;
+	void	*img_f;
 	int		win_width;
 	int		win_height;
 	int		img_width;
 	int		img_height;
-	int		x;
-	int		y;
+	int		x_p;
+	int		y_p;
+	int		i;
+	int		j;
+	char	**map;
 }	t_data;
 
 typedef struct s_space
@@ -42,12 +50,6 @@ typedef struct s_space
 	int ret;
 	int counter;
 }	t_space;
-
-typedef struct s_counter
-{
-	int	i;
-	int	j;
-}	t_counter;
 
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n);

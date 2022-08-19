@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamrire <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 02:21:58 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/18 18:49:59 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/19 04:09:35 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	initialize_map(t_space *env, char *av)
 	env->fd = check_map_file(av);
 }
 
-char **map_valid_dimension(char *av, t_counter *dimension)
+char **map_valid_dimension(char *av, t_data *mlx)
 {
 	t_space	env;
 
@@ -128,79 +128,76 @@ char **map_valid_dimension(char *av, t_counter *dimension)
 	env.map = ft_split(env.saved_lines, '\n');
 	if (check_wall(env.map[0]) || check_wall(env.map[env.counter - 1]))
 		ft_exit("ERROR : Invalid wall structure !");
-	dimension->i = env.len;
-	dimension->j = env.counter;
+	mlx->i = env.len;
+	mlx->j = env.counter;
 	return (env.map);
 }
 
-void	put_elements_positions(t_data mlx, t_counter	dimension, char **map)
+int	put_elements_positions(void *data)
 {
 	int i;
 	int j;
-
+	t_data *mlx;
+	
+	mlx = (t_data *)data;
 	j = 0;
-	while (j < dimension.j)
+	while (j < mlx->j)
 		{
 			i = 0;
-			while (i < dimension.i)
+			while (i < mlx->i)
 			{
-				mlx.img = mlx_xpm_file_to_image(mlx.ptr, "./floor.xpm", &mlx.img_width, &mlx.img_height);
-				mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, i * 64, j * 64);
-				if (map[j][i] == '1')
+				mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img_f, i * 64, j * 64);
+				if (mlx->map[j][i] == '1')
+					mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img_w, i * 64, j * 64);
+				else if (mlx->map[j][i] == '0')
+					mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img_f, i * 64, j * 64);
+				else if (mlx->map[j][i] == 'P')
 				{
-					mlx.img = mlx_xpm_file_to_image(mlx.ptr, "./wall.xpm", &mlx.img_width, &mlx.img_height);
-					mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, i * 64, j * 64);
+					mlx->x_p = i * 64;
+					mlx->y_p = j * 64;
+					mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img_p, mlx->x_p , mlx->y_p);
 				}
-				else if (map[j][i] == '0')
-				{
-					mlx.img = mlx_xpm_file_to_image(mlx.ptr, "./floor.xpm", &mlx.img_width, &mlx.img_height);
-					mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, i * 64, j * 64);
-				}
-				else if (map[j][i] == 'P')
-				{
-					mlx.img = mlx_xpm_file_to_image(mlx.ptr, "./ralph.xpm", &mlx.img_width, &mlx.img_height);
-					mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, i * 64 , j * 64);
-				}
-				else if (map[j][i] == 'C')
-				{
-					mlx.img = mlx_xpm_file_to_image(mlx.ptr, "./trophy.xpm", &mlx.img_width, &mlx.img_height);
-					mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, i * 64, j * 64);
-				}
-				else if (map[j][i] == 'E')
-				{
-					mlx.img = mlx_xpm_file_to_image(mlx.ptr, "./door.xpm", &mlx.img_width, &mlx.img_height);
-					mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, i * 64, j * 64);
-				}
+				else if (mlx->map[j][i] == 'C')
+					mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img_c, i * 64, j * 64);
+				else if (mlx->map[j][i] == 'E')
+					mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img_e, i * 64, j * 64);
 				i++;
 			}
 			j++;
 		}
+		printf("frame\n");
+		return (0);
 }
 
-int key_hook(int key, t_data *mlx)
-{
-	ft_printf("key : %d\n", key);
-	mlx->x += 64;
-	mlx_destroy_image(mlx->ptr, mlx->img);
-	mlx_clear_window(mlx->ptr, mlx->win);
-	mlx->img = mlx_xpm_file_to_image(mlx->ptr, "./ralph.xpm", &mlx->img_width, &mlx->img_height);
-	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img, mlx->x, mlx->y);
-	return 0;
-}
+// int key_hook(int key, void *data)
+// {
+// 	t_data *mlx;
+	
+// 	mlx = (t_data *)data;
+// 	ft_printf("key : %d\n", key);
+// 	mlx->x += 64;
+// 	mlx_clear_window(mlx->ptr, mlx->win);
+// 	mlx->img = mlx_xpm_file_to_image(mlx->ptr, "./ralph.xpm", &mlx->img_width, &mlx->img_height);
+// 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img, mlx->x, mlx->y);
+// 	return 0;
+// }
 
 int main(int ac, char **av)
 {
 	t_data	mlx;
-	char	**map;
-	t_counter	dimension;
 
 	if (ac == 2)
 	{
-		map = map_valid_dimension(av[1], &dimension);
+		mlx.map = map_valid_dimension(av[1], &mlx);
 		mlx.ptr = mlx_init();
-		mlx.win = mlx_new_window(mlx.ptr, dimension.i * 64, dimension.j * 64, "so_long");
-		put_elements_positions(mlx, dimension, map);
-		//mlx_key_hook(mlx.win, key_hook, &mlx);
+		mlx.win = mlx_new_window(mlx.ptr, mlx.i * 64, mlx.j * 64, "so_long");
+		mlx.img_f = mlx_xpm_file_to_image(mlx.ptr, "./floor.xpm", &mlx.img_width, &mlx.img_height);
+		mlx.img_w = mlx_xpm_file_to_image(mlx.ptr, "./wall.xpm", &mlx.img_width, &mlx.img_height);
+		mlx.img_p = mlx_xpm_file_to_image(mlx.ptr, "./ralph.xpm", &mlx.img_width, &mlx.img_height);
+		mlx.img_c = mlx_xpm_file_to_image(mlx.ptr, "./trophy.xpm", &mlx.img_width, &mlx.img_height);
+		mlx.img_e = mlx_xpm_file_to_image(mlx.ptr, "./door.xpm", &mlx.img_width, &mlx.img_height);
+		// mlx_key_hook(mlx.win, key_hook, (void *)&mlx);
+		mlx_loop_hook(mlx.ptr, put_elements_positions, (void *)&mlx);
 		mlx_loop(mlx.ptr);
 	}
 	else
