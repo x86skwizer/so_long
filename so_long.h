@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 00:44:55 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/19 04:03:15 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/19 05:17:20 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_data
 	int		i;
 	int		j;
 	char	**map;
+	int		move;
 }	t_data;
 
 typedef struct s_space

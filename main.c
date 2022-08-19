@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 02:21:58 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/19 04:09:35 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/19 05:27:56 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,22 +165,56 @@ int	put_elements_positions(void *data)
 			}
 			j++;
 		}
-		printf("frame\n");
 		return (0);
 }
 
-// int key_hook(int key, void *data)
-// {
-// 	t_data *mlx;
+int key_hook(int key, void *data)
+{
+	t_data *mlx;
 	
-// 	mlx = (t_data *)data;
-// 	ft_printf("key : %d\n", key);
-// 	mlx->x += 64;
-// 	mlx_clear_window(mlx->ptr, mlx->win);
-// 	mlx->img = mlx_xpm_file_to_image(mlx->ptr, "./ralph.xpm", &mlx->img_width, &mlx->img_height);
-// 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img, mlx->x, mlx->y);
-// 	return 0;
-// }
+	mlx = (t_data *)data;
+	if (key == 2 || key == 124)
+	{
+		if (mlx->map[mlx->y_p / 64][(mlx->x_p / 64) + 1] == '1')
+			return (0);
+		mlx->map[mlx->y_p / 64][mlx->x_p / 64] = '0';
+		mlx->map[mlx->y_p / 64][(mlx->x_p / 64) + 1] = 'P';
+		mlx->x_p += 64;
+		mlx_clear_window(mlx->ptr, mlx->win);
+		ft_printf("Number of moves : %d\n", ++mlx->move);
+	}
+	else if (key == 1 || key == 125)
+	{
+		if (mlx->map[(mlx->y_p / 64) + 1][mlx->x_p / 64] == '1')
+			return (0);
+		mlx->map[mlx->y_p / 64][mlx->x_p / 64] = '0';
+		mlx->map[(mlx->y_p / 64) + 1][mlx->x_p / 64] = 'P';
+		mlx->y_p += 64;
+		mlx_clear_window(mlx->ptr, mlx->win);
+		ft_printf("Number of moves : %d\n", ++mlx->move);
+	}
+	else if (key == 0 || key == 123)
+	{
+		if (mlx->map[mlx->y_p / 64][(mlx->x_p / 64) - 1] == '1')
+			return (0);
+		mlx->map[mlx->y_p / 64][mlx->x_p / 64] = '0';
+		mlx->map[mlx->y_p / 64][(mlx->x_p / 64) - 1] = 'P';
+		mlx->x_p -= 64;
+		mlx_clear_window(mlx->ptr, mlx->win);
+		ft_printf("Number of moves : %d\n", ++mlx->move);
+	}
+	else if (key == 13 || key == 126)
+	{
+		if (mlx->map[(mlx->y_p / 64) - 1][mlx->x_p / 64] == '1')
+			return (0);
+		mlx->map[mlx->y_p / 64][mlx->x_p / 64] = '0';
+		mlx->map[(mlx->y_p / 64) - 1][mlx->x_p / 64] = 'P';
+		mlx->y_p -= 64;
+		mlx_clear_window(mlx->ptr, mlx->win);
+		ft_printf("Number of moves : %d\n", ++mlx->move);
+	}
+	return (0);
+}
 
 int main(int ac, char **av)
 {
@@ -188,6 +222,7 @@ int main(int ac, char **av)
 
 	if (ac == 2)
 	{
+		mlx.move = 0;
 		mlx.map = map_valid_dimension(av[1], &mlx);
 		mlx.ptr = mlx_init();
 		mlx.win = mlx_new_window(mlx.ptr, mlx.i * 64, mlx.j * 64, "so_long");
@@ -196,7 +231,7 @@ int main(int ac, char **av)
 		mlx.img_p = mlx_xpm_file_to_image(mlx.ptr, "./ralph.xpm", &mlx.img_width, &mlx.img_height);
 		mlx.img_c = mlx_xpm_file_to_image(mlx.ptr, "./trophy.xpm", &mlx.img_width, &mlx.img_height);
 		mlx.img_e = mlx_xpm_file_to_image(mlx.ptr, "./door.xpm", &mlx.img_width, &mlx.img_height);
-		// mlx_key_hook(mlx.win, key_hook, (void *)&mlx);
+		mlx_key_hook(mlx.win, key_hook, (void *)&mlx);
 		mlx_loop_hook(mlx.ptr, put_elements_positions, (void *)&mlx);
 		mlx_loop(mlx.ptr);
 	}
