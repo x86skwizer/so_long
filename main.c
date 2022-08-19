@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 02:21:58 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/19 05:41:19 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/19 05:51:06 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,12 @@ int key_hook(int key, void *data)
 	{
 		if (mlx->map[mlx->y_p / 64][(mlx->x_p / 64) + 1] == '1')
 			return (0);
+		else if (mlx->map[mlx->y_p / 64][(mlx->x_p / 64) + 1] == 'E')
+		{
+			mlx->map[mlx->y_p / 64][mlx->x_p / 64] = '0';
+			ft_printf("Nice !\n");
+			exit (0);
+		}
 		mlx->map[mlx->y_p / 64][mlx->x_p / 64] = '0';
 		mlx->map[mlx->y_p / 64][(mlx->x_p / 64) + 1] = 'P';
 		mlx->x_p += 64;
@@ -194,6 +200,12 @@ int key_hook(int key, void *data)
 	{
 		if (mlx->map[(mlx->y_p / 64) + 1][mlx->x_p / 64] == '1')
 			return (0);
+		else if (mlx->map[(mlx->y_p / 64) + 1][mlx->x_p / 64] == 'E')
+		{
+			mlx->map[mlx->y_p / 64][mlx->x_p / 64] = '0';
+			ft_printf("Nice !\n");
+			exit (0);
+		}
 		mlx->map[mlx->y_p / 64][mlx->x_p / 64] = '0';
 		mlx->map[(mlx->y_p / 64) + 1][mlx->x_p / 64] = 'P';
 		mlx->y_p += 64;
@@ -204,6 +216,12 @@ int key_hook(int key, void *data)
 	{
 		if (mlx->map[mlx->y_p / 64][(mlx->x_p / 64) - 1] == '1')
 			return (0);
+		else if (mlx->map[mlx->y_p / 64][(mlx->x_p / 64) - 1] == 'E')
+		{
+			mlx->map[mlx->y_p / 64][mlx->x_p / 64] = '0';
+			ft_printf("Nice !\n");
+			exit (0);
+		}
 		mlx->map[mlx->y_p / 64][mlx->x_p / 64] = '0';
 		mlx->map[mlx->y_p / 64][(mlx->x_p / 64) - 1] = 'P';
 		mlx->x_p -= 64;
@@ -214,6 +232,12 @@ int key_hook(int key, void *data)
 	{
 		if (mlx->map[(mlx->y_p / 64) - 1][mlx->x_p / 64] == '1')
 			return (0);
+		else if (mlx->map[(mlx->y_p / 64) - 1][mlx->x_p / 64] == 'E')
+		{
+			mlx->map[mlx->y_p / 64][mlx->x_p / 64] = '0';
+			ft_printf("Nice !\n");
+			exit (0);
+		}
 		mlx->map[mlx->y_p / 64][mlx->x_p / 64] = '0';
 		mlx->map[(mlx->y_p / 64) - 1][mlx->x_p / 64] = 'P';
 		mlx->y_p -= 64;
