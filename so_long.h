@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 00:44:55 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/19 05:17:20 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/19 05:42:43 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct s_data
 {
 	void	*ptr;
 	void	*win;
-	void	*img;
 	void	*img_p;
 	void	*img_c;
 	void	*img_e;
@@ -48,6 +47,7 @@ typedef struct s_space
 	int fd;
 	int len;
 	int p_status;
+	int	e_status;
 	int ret;
 	int counter;
 }	t_space;

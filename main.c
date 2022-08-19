@@ -6,13 +6,13 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 02:21:58 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/19 05:27:56 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/19 05:41:19 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <stdio.h>
-int check_line(char *line, int len, int *player)
+int check_line(char *line, int len, int *player, int *exitvar)
 {
 
 	int i;
@@ -28,6 +28,13 @@ int check_line(char *line, int len, int *player)
 		{
 			if (*player == 0)
 				*player += 1;
+			else
+				return (-1);
+		}
+		else if (line[i] == 'E')
+		{
+			if (*exitvar == 0)
+				*exitvar += 1;
 			else
 				return (-1);
 		}
@@ -117,7 +124,7 @@ char **map_valid_dimension(char *av, t_data *mlx)
 			env.len = count_line(env.line);
 		else if (env.len != count_line(env.line))
 			ft_exit("ERROR : Invalid line !");
-		env.ret = check_line(env.line, env.len, &env.p_status);
+		env.ret = check_line(env.line, env.len, &env.p_status, &env.e_status);
 		if (env.ret == -1)
 			ft_exit("ERROR : Invalid map structure !");
 		save_line(&env.saved_lines, env.line);
