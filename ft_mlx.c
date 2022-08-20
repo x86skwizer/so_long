@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 03:58:11 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 04:20:34 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/20 04:40:30 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_mlx(t_data *mlx)
 			&mlx->img_width, &mlx->img_height);
 }
 
-void	ft_boucle(t_data *mlx, int *i, int *j)
+void	load_image(t_data *mlx, int *i, int *j)
 {
 	if (mlx->map[(*j)][(*i)] == '1')
 		mlx_put_image_to_window(mlx->ptr, mlx->win,

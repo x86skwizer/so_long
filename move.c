@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 00:31:24 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 03:09:56 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/20 04:55:06 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	exit_game(t_data *mlx)
 {
+	int	i;
+
+	i = 0;
 	mlx->collect = collect_search(mlx, 'C');
 	if (mlx->collect)
 		return ;

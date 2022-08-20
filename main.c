@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 02:21:58 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 04:08:12 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/20 04:44:19 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,17 @@ int	put_elements_positions(void *data)
 		{
 			mlx_put_image_to_window(mlx->ptr, mlx->win,
 				mlx->img_f, i * 64, j * 64);
-			ft_boucle(mlx, &i, &j);
+			load_image(mlx, &i, &j);
 			i++;
 		}
 		j++;
 	}
+	return (0);
+}
+
+int	quit(void)
+{
+	exit(0);
 	return (0);
 }
 
@@ -69,10 +75,12 @@ int	main(int ac, char **av)
 		mlx.ptr = mlx_init();
 		ft_mlx(&mlx);
 		mlx_key_hook(mlx.win, key_hook, (void *)&mlx);
+		mlx_hook(mlx.win, 17, 0, quit, NULL);
 		mlx_loop_hook(mlx.ptr, put_elements_positions, (void *)&mlx);
 		mlx_loop(mlx.ptr);
 	}
 	else
 		ft_exit("Not the right number of parameters !");
+	
 	return (0);
 }

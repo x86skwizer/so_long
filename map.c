@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 00:35:19 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 04:20:16 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/20 04:48:33 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	check_map_file(char *av)
 
 	ext = ft_substr(av, ft_strlen(av) - 4, 4);
 	status = ft_strncmp(ext, ".ber", ft_strlen(ext));
+	free(ext);
 	fd = open(av, O_RDONLY);
 	if (status != 0 || fd == -1)
 	{
