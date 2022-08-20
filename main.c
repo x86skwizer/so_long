@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 02:21:58 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 03:02:36 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/20 04:08:12 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,7 @@ int	put_elements_positions(void *data)
 		{
 			mlx_put_image_to_window(mlx->ptr, mlx->win,
 				mlx->img_f, i * 64, j * 64);
-			if (mlx->map[j][i] == '1')
-				mlx_put_image_to_window(mlx->ptr, mlx->win,
-					mlx->img_w, i * 64, j * 64);
-			else if (mlx->map[j][i] == '0')
-				mlx_put_image_to_window(mlx->ptr, mlx->win,
-					mlx->img_f, i * 64, j * 64);
-			else if (mlx->map[j][i] == 'P')
-			{
-				mlx->x_p = i * 64;
-				mlx->y_p = j * 64;
-				mlx_put_image_to_window(mlx->ptr, mlx->win,
-					mlx->img_p, mlx->x_p, mlx->y_p);
-			}
-			else if (mlx->map[j][i] == 'C')
-				mlx_put_image_to_window(mlx->ptr, mlx->win,
-					mlx->img_c, i * 64, j * 64);
-			else if (mlx->map[j][i] == 'E')
-				mlx_put_image_to_window(mlx->ptr, mlx->win,
-					mlx->img_e, i * 64, j * 64);
+			ft_boucle(mlx, &i, &j);
 			i++;
 		}
 		j++;
@@ -85,17 +67,7 @@ int	main(int ac, char **av)
 			|| (collect_search(&mlx, 'E') != 1))
 			ft_exit("ERROR : You need 1 Player and 1 exit !");
 		mlx.ptr = mlx_init();
-		mlx.win = mlx_new_window(mlx.ptr, mlx.i * 64, mlx.j * 64, "so_long");
-		mlx.img_f = mlx_xpm_file_to_image(mlx.ptr, "./images/floor.xpm",
-				&mlx.img_width, &mlx.img_height);
-		mlx.img_w = mlx_xpm_file_to_image(mlx.ptr, "./images/wall.xpm",
-				&mlx.img_width, &mlx.img_height);
-		mlx.img_p = mlx_xpm_file_to_image(mlx.ptr, "./images/ralph.xpm",
-				&mlx.img_width, &mlx.img_height);
-		mlx.img_c = mlx_xpm_file_to_image(mlx.ptr, "./images/trophy.xpm",
-				&mlx.img_width, &mlx.img_height);
-		mlx.img_e = mlx_xpm_file_to_image(mlx.ptr, "./images/door.xpm",
-				&mlx.img_width, &mlx.img_height);
+		ft_mlx(&mlx);
 		mlx_key_hook(mlx.win, key_hook, (void *)&mlx);
 		mlx_loop_hook(mlx.ptr, put_elements_positions, (void *)&mlx);
 		mlx_loop(mlx.ptr);

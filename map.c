@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 00:35:19 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 03:07:11 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/20 04:20:16 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,8 @@ int	check_line(char *line, int len, int *player, int *exitvar)
 		if (line[i] != '0' && line[i] != '1' && line[i] != 'C'
 			&& line[i] != 'E' && line[i] != 'P')
 			return (-1);
-		if (line[i] == 'P')
-		{
-			if (*player == 0)
-				*player += 1;
-			else
-				return (-1);
-		}
-		else if (line[i] == 'E')
-		{
-			if (*exitvar == 0)
-				*exitvar += 1;
-			else
-				return (-1);
-		}
+		if (read_player_exit(line, i, player, exitvar) != 0)
+			return (-1);
 		i++;
 	}
 	return (0);

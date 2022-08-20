@@ -1,4 +1,4 @@
-SRC = main.c ./includes/ft_nbr_base.c ./includes/ft_printf.c ./includes/ft_putchar.c ./includes/ft_putnbr.c ./includes/ft_putstr.c ./includes/ft_split.c ./includes/get_next_line_utils.c ./includes/get_next_line.c so_long_utils.c move.c map.c
+SRC = main.c ./includes/ft_nbr_base.c ./includes/ft_printf.c ./includes/ft_putchar.c ./includes/ft_putnbr.c ./includes/ft_putstr.c ./includes/ft_split.c ./includes/get_next_line_utils.c ./includes/get_next_line.c so_long_utils.c move.c map.c ft_mlx.c
 NAME = so_long
 CC = gcc
 OBJ = $(SRC:%.c=%.o)

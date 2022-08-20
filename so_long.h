@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 00:44:55 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 03:11:02 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/20 04:20:57 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,8 @@ int		check_map_file(char *av);
 void	initialize_map(t_space *env, char *av);
 char	**map_valid_dimension(char *av, t_data *mlx);
 int		collect_search(t_data *mlx, char c);
+void	ft_mlx(t_data *mlx);
+void	ft_boucle(t_data *mlx, int *i, int *j);
+int		read_player_exit(char *line, int i, int *player, int *exitvar);
 
 #endif
