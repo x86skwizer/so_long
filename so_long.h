@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 00:44:55 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 02:45:40 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/20 03:11:02 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,16 @@ typedef struct s_data
 
 typedef struct s_space
 {
-	char **map;
-	char *saved_lines;
-	char *line;
-	int fd;
-	int len;
-	int p_status;
-	int	e_status;
-	int ret;
-	int counter;
+	char	**map;
+	char	*saved_lines;
+	char	*line;
+	int		fd;
+	int		len;
+	int		p_status;
+	int		e_status;
+	int		ret;
+	int		counter;
 }	t_space;
-
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	**ft_split(char const *s, char c);

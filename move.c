@@ -6,10 +6,9 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 00:31:24 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 02:50:32 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/20 03:09:56 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "so_long.h"
 
@@ -17,7 +16,7 @@ void	exit_game(t_data *mlx)
 {
 	mlx->collect = collect_search(mlx, 'C');
 	if (mlx->collect)
-		return;
+		return ;
 	mlx->map[mlx->y_p / 64][mlx->x_p / 64] = '0';
 	ft_printf("GAME OVER\n");
 	exit (0);
@@ -26,10 +25,11 @@ void	exit_game(t_data *mlx)
 void	move_right(t_data *mlx)
 {
 	if (mlx->map[mlx->y_p / 64][(mlx->x_p / 64) + 1] == '1')
-		return;
+		return ;
 	else if (mlx->map[mlx->y_p / 64][(mlx->x_p / 64) + 1] == 'E')
 		exit_game(mlx);
-	else if (mlx->map[mlx->y_p / 64][(mlx->x_p / 64) + 1] == 'C'|| mlx->map[mlx->y_p / 64][(mlx->x_p / 64) + 1] == '0')
+	else if (mlx->map[mlx->y_p / 64][(mlx->x_p / 64) + 1] == 'C'
+		|| mlx->map[mlx->y_p / 64][(mlx->x_p / 64) + 1] == '0')
 	{
 		mlx->map[mlx->y_p / 64][mlx->x_p / 64] = '0';
 		mlx->map[mlx->y_p / 64][(mlx->x_p / 64) + 1] = 'P';
@@ -37,16 +37,17 @@ void	move_right(t_data *mlx)
 		ft_printf("Number of moves : %d\n", ++mlx->move);
 	}
 	else
-		return;
+		return ;
 }
 
 void	move_down(t_data *mlx)
 {
 	if (mlx->map[(mlx->y_p / 64) + 1][mlx->x_p / 64] == '1')
-		return;
+		return ;
 	else if (mlx->map[(mlx->y_p / 64) + 1][mlx->x_p / 64] == 'E')
 		exit_game(mlx);
-	else if (mlx->map[(mlx->y_p / 64) + 1][mlx->x_p / 64] == 'C' || mlx->map[(mlx->y_p / 64) + 1][mlx->x_p / 64] == '0')
+	else if (mlx->map[(mlx->y_p / 64) + 1][mlx->x_p / 64] == 'C'
+		|| mlx->map[(mlx->y_p / 64) + 1][mlx->x_p / 64] == '0')
 	{
 		mlx->map[mlx->y_p / 64][mlx->x_p / 64] = '0';
 		mlx->map[(mlx->y_p / 64) + 1][mlx->x_p / 64] = 'P';
@@ -54,16 +55,17 @@ void	move_down(t_data *mlx)
 		ft_printf("Number of moves : %d\n", ++mlx->move);
 	}
 	else
-		return;
+		return ;
 }
 
 void	move_left(t_data *mlx)
 {
 	if (mlx->map[mlx->y_p / 64][(mlx->x_p / 64) - 1] == '1')
-		return;
+		return ;
 	else if (mlx->map[mlx->y_p / 64][(mlx->x_p / 64) - 1] == 'E')
 		exit_game(mlx);
-	else if (mlx->map[mlx->y_p / 64][(mlx->x_p / 64) - 1] == 'C' || mlx->map[mlx->y_p / 64][(mlx->x_p / 64) - 1] == '0')
+	else if (mlx->map[mlx->y_p / 64][(mlx->x_p / 64) - 1] == 'C'
+		|| mlx->map[mlx->y_p / 64][(mlx->x_p / 64) - 1] == '0')
 	{
 		mlx->map[mlx->y_p / 64][mlx->x_p / 64] = '0';
 		mlx->map[mlx->y_p / 64][(mlx->x_p / 64) - 1] = 'P';
@@ -71,16 +73,17 @@ void	move_left(t_data *mlx)
 		ft_printf("Number of moves : %d\n", ++mlx->move);
 	}
 	else
-		return;
+		return ;
 }
 
 void	move_up(t_data *mlx)
 {
 	if (mlx->map[(mlx->y_p / 64) - 1][mlx->x_p / 64] == '1')
-		return;
+		return ;
 	else if (mlx->map[(mlx->y_p / 64) - 1][mlx->x_p / 64] == 'E')
 		exit_game(mlx);
-	else if (mlx->map[(mlx->y_p / 64) - 1][mlx->x_p / 64] == 'C' || mlx->map[(mlx->y_p / 64) - 1][mlx->x_p / 64] == '0')
+	else if (mlx->map[(mlx->y_p / 64) - 1][mlx->x_p / 64] == 'C'
+		|| mlx->map[(mlx->y_p / 64) - 1][mlx->x_p / 64] == '0')
 	{
 		mlx->map[mlx->y_p / 64][mlx->x_p / 64] = '0';
 		mlx->map[(mlx->y_p / 64) - 1][mlx->x_p / 64] = 'P';
@@ -88,5 +91,5 @@ void	move_up(t_data *mlx)
 		ft_printf("Number of moves : %d\n", ++mlx->move);
 	}
 	else
-		return;
+		return ;
 }

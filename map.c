@@ -6,24 +6,23 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 00:35:19 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 02:19:17 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/20 03:07:11 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "so_long.h"
 
-int check_line(char *line, int len, int *player, int *exitvar)
+int	check_line(char *line, int len, int *player, int *exitvar)
 {
+	int	i;
 
-	int i;
-	
 	i = 0;
 	if (line[0] != '1' || line[len - 1] != '1')
 		return (-1);
 	while (line[i] && i < len)
 	{
-		if (line[i] != '0' && line[i] != '1' && line[i] != 'C' && line[i] != 'E' && line[i] != 'P')
+		if (line[i] != '0' && line[i] != '1' && line[i] != 'C'
+			&& line[i] != 'E' && line[i] != 'P')
 			return (-1);
 		if (line[i] == 'P')
 		{
@@ -44,10 +43,10 @@ int check_line(char *line, int len, int *player, int *exitvar)
 	return (0);
 }
 
-int check_wall(char *line)
+int	check_wall(char *line)
 {
-	int index;
-	
+	int	index;
+
 	index = 0;
 	while (line[index])
 	{
@@ -58,11 +57,11 @@ int check_wall(char *line)
 	return (0);
 }
 
-int check_map_file(char *av)
+int	check_map_file(char *av)
 {
-	char *ext;
-	int status;
-	int fd;
+	char	*ext;
+	int		status;
+	int		fd;
 
 	ext = ft_substr(av, ft_strlen(av) - 4, 4);
 	status = ft_strncmp(ext, ".ber", ft_strlen(ext));
@@ -77,20 +76,20 @@ int check_map_file(char *av)
 
 void	draw_map(t_space *env)
 {
-		if (env->len == 0)
-			env->len = count_line(env->line);
-		else if (env->len != count_line(env->line))
-			ft_exit("ERROR : Invalid line !");
-		env->ret = check_line(env->line, env->len, &env->p_status, &env->e_status);
-		if (env->ret == -1)
-			ft_exit("ERROR : Invalid map structure !");
-		save_line(&env->saved_lines, env->line);
-		free(env->line);
-		env->line = NULL;
-		env->counter++;
+	if (env->len == 0)
+		env->len = count_line(env->line);
+	else if (env->len != count_line(env->line))
+		ft_exit("ERROR : Invalid line !");
+	env->ret = check_line(env->line, env->len, &env->p_status, &env->e_status);
+	if (env->ret == -1)
+		ft_exit("ERROR : Invalid map structure !");
+	save_line(&env->saved_lines, env->line);
+	free(env->line);
+	env->line = NULL;
+	env->counter++;
 }
 
-char **map_valid_dimension(char *av, t_data *mlx)
+char	**map_valid_dimension(char *av, t_data *mlx)
 {
 	t_space	env;
 
@@ -103,7 +102,7 @@ char **map_valid_dimension(char *av, t_data *mlx)
 	{
 		env.line = get_next_line(env.fd);
 		if (!env.line)
-			break;
+			break ;
 		draw_map(&env);
 	}
 	env.map = ft_split(env.saved_lines, '\n');

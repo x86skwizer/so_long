@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 08:29:41 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 02:51:26 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/20 03:12:06 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,15 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (str1[i] - str2[i]);
 }
 
-void ft_exit(char *message)
+void	ft_exit(char *message)
 {
 	ft_printf("%s\n", message);
 	exit(-1);
 }
 
-int count_line(char *s)
+int	count_line(char *s)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	while (s[index])
@@ -69,9 +69,9 @@ int count_line(char *s)
 	return (index);
 }
 
-void save_line(char **dist, char *line)
+void	save_line(char **dist, char *line)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = ft_strjoin(*dist, line);
 	free(*dist);
