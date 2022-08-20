@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 02:21:58 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 00:56:05 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/20 02:47:09 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ int main(int ac, char **av)
 	{
 		mlx.move = 0;
 		mlx.map = map_valid_dimension(av[1], &mlx);
+		mlx.collect = collect_search(&mlx, 'C');
+		if (mlx.collect < 1)
+			ft_exit("ERROR : Not Enough Trophies !");
+		if ((collect_search(&mlx, 'P') != 1) || (collect_search(&mlx, 'E') != 1))
+			ft_exit("ERROR : You need 1 Player and 1 exit !");
 		mlx.ptr = mlx_init();
 		mlx.win = mlx_new_window(mlx.ptr, mlx.i * 64, mlx.j * 64, "so_long");
 		mlx.img_f = mlx_xpm_file_to_image(mlx.ptr, "./images/floor.xpm", &mlx.img_width, &mlx.img_height);

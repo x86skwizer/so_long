@@ -6,11 +6,33 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 08:29:41 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 00:39:37 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/20 02:51:26 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	collect_search(t_data *mlx, char c)
+{
+	int	y;
+	int	x;
+	int	i;
+
+	y = 0;
+	i = 0;
+	while (y < mlx->j)
+	{
+		x = 0;
+		while (x < mlx->i)
+		{
+			if (mlx->map[y][x] == c)
+				i++;
+			x++;
+		}
+		y++;
+	}
+	return (i);
+}
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
