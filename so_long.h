@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 00:44:55 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/22 02:11:00 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/22 03:11:24 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ typedef struct s_data
 	void	*img_e;
 	void	*img_w;
 	void	*img_f;
-	int		win_width;
-	int		win_height;
 	int		img_width;
 	int		img_height;
 	int		n_p;
