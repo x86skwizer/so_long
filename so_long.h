@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 00:44:55 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 04:40:42 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/22 02:11:00 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,7 @@ int		collect_search(t_data *mlx, char c);
 void	ft_mlx(t_data *mlx);
 void	load_image(t_data *mlx, int *i, int *j);
 int		read_player_exit(char *line, int i, int *player, int *exitvar);
+void	free_double_pointer(char **ptr);
+void	free_env(t_space env);
 
 #endif

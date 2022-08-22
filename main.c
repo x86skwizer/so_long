@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 02:21:58 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 04:44:19 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/22 01:56:15 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,5 @@ int	main(int ac, char **av)
 	}
 	else
 		ft_exit("Not the right number of parameters !");
-	
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 00:35:19 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 04:48:33 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/22 02:10:33 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,18 @@ void	draw_map(t_space *env)
 	if (env->len == 0)
 		env->len = count_line(env->line);
 	else if (env->len != count_line(env->line))
+	{
+		free(env->saved_lines);
+		free(env->line);
 		ft_exit("ERROR : Invalid line !");
+	}
 	env->ret = check_line(env->line, env->len, &env->p_status, &env->e_status);
 	if (env->ret == -1)
+	{
+		free(env->saved_lines);
+		free(env->line);
 		ft_exit("ERROR : Invalid map structure !");
+	}
 	save_line(&env->saved_lines, env->line);
 	free(env->line);
 	env->line = NULL;
@@ -94,9 +102,14 @@ char	**map_valid_dimension(char *av, t_data *mlx)
 			break ;
 		draw_map(&env);
 	}
+	if (!(ft_strlen(env.saved_lines)))
+	{
+		free(env.saved_lines);
+		ft_exit("ERROR : Empty file !");
+	}
 	env.map = ft_split(env.saved_lines, '\n');
 	if (check_wall(env.map[0]) || check_wall(env.map[env.counter - 1]))
-		ft_exit("ERROR : Invalid wall structure !");
+		free_env(env);
 	mlx->i = env.len;
 	mlx->j = env.counter;
 	return (env.map);

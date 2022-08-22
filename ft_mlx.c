@@ -6,11 +6,32 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 03:58:11 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 04:40:30 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/22 02:10:44 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	free_double_pointer(char **ptr)
+{
+	int	i;
+
+	i = 0;
+	if (!ptr)
+		return ;
+	while (ptr[i])
+		free(ptr[i++]);
+	free(ptr);
+	ptr = NULL;
+}
+
+void	free_env(t_space env)
+{
+	free(env.saved_lines);
+	free(env.line);
+	free_double_pointer(env.map);
+	ft_exit("ERROR : Invalid wall structure !");
+}
 
 void	ft_mlx(t_data *mlx)
 {
