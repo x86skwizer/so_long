@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 02:21:58 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/22 01:56:15 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/22 03:36:43 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ int	key_hook(int key, void *data)
 		move_left(mlx);
 	else if (key == 13 || key == 126)
 		move_up(mlx);
+	else if (key == 53)
+	{
+		free_double_pointer(mlx->map);
+		exit(0);
+	}
 	return (0);
 }
 
