@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 03:58:11 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/22 02:10:44 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/23 03:08:41 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	free_double_pointer(char **ptr)
 
 void	free_env(t_space env)
 {
-	free(env.saved_lines);
 	free(env.line);
 	free_double_pointer(env.map);
 	ft_exit("ERROR : Invalid wall structure !");

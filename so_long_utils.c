@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 08:29:41 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/20 03:12:06 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/23 03:03:42 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,4 @@ int	count_line(char *s)
 	if (s[index - 1] == '\n')
 		index--;
 	return (index);
-}
-
-void	save_line(char **dist, char *line)
-{
-	char	*tmp;
-
-	tmp = ft_strjoin(*dist, line);
-	free(*dist);
-	*dist = tmp;
 }

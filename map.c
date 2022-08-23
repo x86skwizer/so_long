@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 00:35:19 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/22 02:10:33 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/23 03:07:43 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	check_map_file(char *av)
 
 void	draw_map(t_space *env)
 {
+	char	*tmp;
+	
 	if (env->len == 0)
 		env->len = count_line(env->line);
 	else if (env->len != count_line(env->line))
@@ -80,8 +82,10 @@ void	draw_map(t_space *env)
 		free(env->line);
 		ft_exit("ERROR : Invalid map structure !");
 	}
-	save_line(&env->saved_lines, env->line);
+	tmp = ft_strjoin(env->saved_lines, env->line);
+	free(env->saved_lines);
 	free(env->line);
+	env->saved_lines = tmp;
 	env->line = NULL;
 	env->counter++;
 }
@@ -108,6 +112,7 @@ char	**map_valid_dimension(char *av, t_data *mlx)
 		ft_exit("ERROR : Empty file !");
 	}
 	env.map = ft_split(env.saved_lines, '\n');
+	free(env.saved_lines);
 	if (check_wall(env.map[0]) || check_wall(env.map[env.counter - 1]))
 		free_env(env);
 	mlx->i = env.len;

@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 00:44:55 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/22 03:11:24 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/23 03:08:57 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	move_left(t_data *mlx);
 void	move_up(t_data *mlx);
 void	ft_exit(char *message);
 int		count_line(char *s);
-void	save_line(char **dist, char *line);
 int		check_line(char *line, int len, int *player, int *exitvar);
 int		check_wall(char *line);
 int		check_map_file(char *av);

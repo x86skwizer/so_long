@@ -9,7 +9,7 @@ all : $(NAME)
 	$(CC) -Wall -Wextra -Werror -Imlx -g3 -c $< -o $@
 
 $(NAME) : $(OBJ)
-	$(CC) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME) -fsanitize=address
+	$(CC) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 clean :
 	rm -f $(OBJ)
