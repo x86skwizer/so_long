@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 00:35:19 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/23 03:07:43 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/23 03:38:46 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	check_map_file(char *av)
 void	draw_map(t_space *env)
 {
 	char	*tmp;
-	
+
 	if (env->len == 0)
 		env->len = count_line(env->line);
 	else if (env->len != count_line(env->line))
@@ -106,11 +106,7 @@ char	**map_valid_dimension(char *av, t_data *mlx)
 			break ;
 		draw_map(&env);
 	}
-	if (!(ft_strlen(env.saved_lines)))
-	{
-		free(env.saved_lines);
-		ft_exit("ERROR : Empty file !");
-	}
+	check_len(env);
 	env.map = ft_split(env.saved_lines, '\n');
 	free(env.saved_lines);
 	if (check_wall(env.map[0]) || check_wall(env.map[env.counter - 1]))

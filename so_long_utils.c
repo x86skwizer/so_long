@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 08:29:41 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/23 03:03:42 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/23 03:38:09 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,13 @@ int	count_line(char *s)
 	if (s[index - 1] == '\n')
 		index--;
 	return (index);
+}
+
+void	check_len(t_space env)
+{
+	if (!(ft_strlen(env.saved_lines)))
+	{
+		free(env.saved_lines);
+		ft_exit("ERROR : Empty file !");
+	}
 }

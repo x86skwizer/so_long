@@ -6,7 +6,7 @@
 /*   By: yamrire <yamrire@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 02:21:58 by yamrire           #+#    #+#             */
-/*   Updated: 2022/08/23 03:30:48 by yamrire          ###   ########.fr       */
+/*   Updated: 2022/08/23 03:35:16 by yamrire          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(int ac, char **av)
 	{
 		mlx.move = 0;
 		mlx.map = map_valid_dimension(av[1], &mlx);
-		if ((mlx.i * 64 > 2560) || (mlx.j *64 > 1440))
+		if (((mlx.i * 64) > 2560) || ((mlx.j * 64) > 1440))
 			ft_exit("ERROR : Too much for this mac's resolution");
 		mlx.collect = collect_search(&mlx, 'C');
 		if (mlx.collect < 1)
